@@ -1,0 +1,14 @@
+[project]
+name = "ringwatch"
+version = "0.1.0"
+description = "Daily competitor product-update monitor for RingConn with Feishu webhook delivery."
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [{ name = "RingConn Product" }]
+dependencies = []
+
+[project.scripts]
+ringwatch = "ringwatch.cli:main"
+
+[tool.setuptools]
+packages = ["ringwatch"]

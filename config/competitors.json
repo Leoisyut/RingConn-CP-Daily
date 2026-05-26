@@ -1,0 +1,257 @@
+{
+  "agent": {
+    "report_title": "RingConn 竞品产品动态日报",
+    "lookback_days": 7,
+    "max_items": 12,
+    "min_score": 3,
+    "timezone": "Asia/Shanghai",
+    "send_empty_report": true,
+    "google_news_locale": "hl=en-US&gl=US&ceid=US:en",
+    "product_keywords": [
+      "ring",
+      "smart ring",
+      "wearable",
+      "health",
+      "sleep",
+      "recovery",
+      "readiness",
+      "hrv",
+      "heart rate",
+      "spo2",
+      "temperature",
+      "sensor",
+      "ecg",
+      "afib",
+      "blood pressure",
+      "glucose",
+      "battery",
+      "charging case",
+      "subscription",
+      "app",
+      "firmware",
+      "ai",
+      "fda",
+      "patent",
+      "import ban"
+    ],
+    "update_keywords": [
+      "announce",
+      "announces",
+      "launch",
+      "launches",
+      "release",
+      "releases",
+      "update",
+      "updates",
+      "unveil",
+      "unveils",
+      "pre-order",
+      "preorder",
+      "shipping",
+      "available",
+      "availability",
+      "rollout",
+      "feature",
+      "firmware",
+      "beta",
+      "integration",
+      "partnership",
+      "clinical",
+      "cleared",
+      "lawsuit",
+      "patent",
+      "ban",
+      "subscription",
+      "pricing"
+    ],
+    "exclude_keywords": [
+      "coupon",
+      "promo code",
+      "deal roundup",
+      "best deals",
+      "amazon sale",
+      "black friday"
+    ]
+  },
+  "competitors": [
+    {
+      "id": "oura",
+      "name": "Oura",
+      "company": "Oura Health",
+      "priority": "core",
+      "products": ["Oura Ring 4", "Oura Ring Gen 3", "Oura App", "Oura Membership"],
+      "rationale": "Category benchmark for sleep, recovery, readiness, app experience, subscription, and patent strategy.",
+      "queries": [
+        "Oura Ring product update release feature app",
+        "Oura Ring 4 firmware sensor sleep readiness update",
+        "Oura patent smart ring Samsung Ultrahuman Circular",
+        "Oura subscription membership health app update"
+      ],
+      "official_urls": [
+        "https://ouraring.com/blog/",
+        "https://ouraring.com/product/rings"
+      ]
+    },
+    {
+      "id": "samsung",
+      "name": "Samsung",
+      "company": "Samsung Electronics",
+      "priority": "core",
+      "products": ["Galaxy Ring", "Samsung Health", "Galaxy AI"],
+      "rationale": "Phone ecosystem competitor with no-subscription positioning and strong Android distribution.",
+      "queries": [
+        "Samsung Galaxy Ring product update Samsung Health AI",
+        "Galaxy Ring 2 release battery sensor sleep update",
+        "Samsung Galaxy Ring firmware update health features",
+        "Samsung smart ring patent Oura lawsuit"
+      ],
+      "official_urls": [
+        "https://news.samsung.com/global/",
+        "https://www.samsung.com/us/rings/galaxy-ring/"
+      ]
+    },
+    {
+      "id": "ultrahuman",
+      "name": "Ultrahuman",
+      "company": "Ultrahuman Healthcare",
+      "priority": "core",
+      "products": ["Ultrahuman Ring AIR", "Ultrahuman Ring Pro", "Ultrahuman App"],
+      "rationale": "No-subscription smart ring competitor with metabolic, fitness, and recovery positioning.",
+      "queries": [
+        "Ultrahuman Ring product update release feature",
+        "Ultrahuman Ring Pro launch battery charging case",
+        "Ultrahuman Ring Air app update sleep recovery",
+        "Ultrahuman Oura patent import ban settlement"
+      ],
+      "official_urls": [
+        "https://www.ultrahuman.com/ring/",
+        "https://blog.ultrahuman.com/"
+      ]
+    },
+    {
+      "id": "circular",
+      "name": "Circular",
+      "company": "Circular",
+      "priority": "important",
+      "products": ["Circular Ring 2", "Circular Ring Slim", "Kira AI"],
+      "rationale": "Differentiates through haptics, ECG/AFib messaging, AI assistant, and team dashboard.",
+      "queries": [
+        "Circular Ring 2 product update ECG AFib",
+        "Circular Ring 2 launch feature update Kira AI",
+        "Circular smart ring team dashboard clinical update",
+        "Circular Ring sizing app battery update"
+      ],
+      "official_urls": [
+        "https://www.circular.xyz/",
+        "https://www.circular.xyz/blog"
+      ]
+    },
+    {
+      "id": "amazfit",
+      "name": "Amazfit",
+      "company": "Zepp Health",
+      "priority": "important",
+      "products": ["Amazfit Helio Ring", "Zepp App", "Zepp Aura"],
+      "rationale": "Affordable sports ecosystem competitor with Amazfit wearable bundling and app ecosystem leverage.",
+      "queries": [
+        "Amazfit Helio Ring product update sleep monitoring",
+        "Zepp Health Helio Ring firmware update",
+        "Amazfit Helio Ring app feature update",
+        "Amazfit smart ring new product release"
+      ],
+      "official_urls": [
+        "https://us.amazfit.com/products/amazfit-helio-ring",
+        "https://www.zepp.com/"
+      ]
+    },
+    {
+      "id": "movano",
+      "name": "Movano Health",
+      "company": "Movano Health",
+      "priority": "important",
+      "products": ["Evie Ring", "Movano Health App"],
+      "rationale": "Women-health smart ring positioning and medical-sensor roadmap are relevant to segmentation and claims.",
+      "queries": [
+        "Evie Ring product update Movano Health",
+        "Movano Health Evie Ring app update",
+        "Movano Health blood pressure glucose smart ring update",
+        "Evie Ring women's health feature update"
+      ],
+      "official_urls": [
+        "https://movanohealth.com/",
+        "https://eviering.com/"
+      ]
+    },
+    {
+      "id": "noise",
+      "name": "Noise",
+      "company": "Noise",
+      "priority": "regional",
+      "products": ["Luna Ring"],
+      "rationale": "India-market smart ring competitor; useful for tracking regional pricing and distribution.",
+      "queries": [
+        "Noise Luna Ring product update feature",
+        "Luna Ring smart ring app update India",
+        "Noise smart ring launch update"
+      ],
+      "official_urls": ["https://www.gonoise.com/"]
+    },
+    {
+      "id": "boat",
+      "name": "boAt",
+      "company": "Imagine Marketing",
+      "priority": "regional",
+      "products": ["boAt Smart Ring"],
+      "rationale": "India mass-market wearable brand that can pressure entry pricing.",
+      "queries": [
+        "boAt Smart Ring product update",
+        "boAt smart ring launch feature app",
+        "boAt Ring health wearable update"
+      ],
+      "official_urls": ["https://www.boat-lifestyle.com/"]
+    },
+    {
+      "id": "low_cost_cross_border",
+      "name": "Low-cost cross-border rings",
+      "company": "COLMI / Rollme / RENPHO and similar brands",
+      "priority": "watchlist",
+      "products": ["COLMI smart rings", "Rollme smart rings", "RENPHO Lynx"],
+      "rationale": "Tracks low-price feature diffusion, marketplaces, and consumer expectations below RingConn price bands.",
+      "queries": [
+        "COLMI smart ring product update",
+        "Rollme smart ring product update",
+        "RENPHO Lynx smart ring update",
+        "budget smart ring launch no subscription"
+      ],
+      "official_urls": []
+    },
+    {
+      "id": "whoop",
+      "name": "Whoop",
+      "company": "Whoop",
+      "priority": "adjacent",
+      "products": ["Whoop", "Whoop App", "Whoop Membership"],
+      "rationale": "Screenless recovery subscription benchmark and frequent software-feature competitor for health insights.",
+      "queries": [
+        "Whoop product update recovery sleep feature",
+        "Whoop app update health insights",
+        "Whoop subscription wearable launch update"
+      ],
+      "official_urls": ["https://www.whoop.com/"]
+    },
+    {
+      "id": "garmin_apple",
+      "name": "Garmin / Apple / Samsung Watch",
+      "company": "Adjacent smartwatch ecosystems",
+      "priority": "adjacent",
+      "products": ["Apple Watch", "Garmin watches", "Galaxy Watch"],
+      "rationale": "Tracks adjacent sleep, recovery, health sensor, and AI features that can reset user expectations.",
+      "queries": [
+        "Apple Watch sleep recovery health sensor update",
+        "Garmin sleep recovery health feature update",
+        "Galaxy Watch Samsung Health sleep recovery update"
+      ],
+      "official_urls": []
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+name: RingWatch Daily Competitor Digest
+
+on:
+  schedule:
+    # 09:00 Asia/Shanghai == 01:00 UTC
+    - cron: "0 1 * * *"
+  workflow_dispatch:
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.9"
+      - name: Restore seen-state cache
+        uses: actions/cache@v4
+        with:
+          path: .ringwatch
+          key: ringwatch-state-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: |
+            ringwatch-state-${{ runner.os }}-
+      - name: Run RingWatch
+        env:
+          FEISHU_WEBHOOK_URL: ${{ secrets.FEISHU_WEBHOOK_URL }}
+          FEISHU_WEBHOOK_SECRET: ${{ secrets.FEISHU_WEBHOOK_SECRET }}
+        run: python -m ringwatch run --state .ringwatch/state.json
