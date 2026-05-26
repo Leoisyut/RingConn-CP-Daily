@@ -11,20 +11,53 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.9"
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: pip-${{ runner.os }}-${{ hashFiles('pyproject.toml') }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e .
+
       - name: Restore seen-state cache
         uses: actions/cache@v4
         with:
           path: .ringwatch
-          key: ringwatch-state-${{ runner.os }}-${{ github.run_id }}
+          key: ringwatch-state-${{ runner.os }}-${{ github.ref_name }}-${{ github.run_number }}
           restore-keys: |
+            ringwatch-state-${{ runner.os }}-${{ github.ref_name }}-
             ringwatch-state-${{ runner.os }}-
-      - name: Run RingWatch
+
+      - name: Run RingWatch (retry)
         env:
           FEISHU_WEBHOOK_URL: ${{ secrets.FEISHU_WEBHOOK_URL }}
           FEISHU_WEBHOOK_SECRET: ${{ secrets.FEISHU_WEBHOOK_SECRET }}
-        run: python -m ringwatch run --state .ringwatch/state.json
+        run: |
+          set -euo pipefail
+          mkdir -p .ringwatch
+          : > .ringwatch/run.log
+          for attempt in 1 2 3; do
+            echo "Attempt ${attempt}/3 @ $(date -u +%Y-%m-%dT%H:%M:%SZ)" | tee -a .ringwatch/run.log
+            if python -m ringwatch run --state .ringwatch/state.json 2>&1 | tee -a .ringwatch/run.log; then
+              exit 0
+            fi
+            sleep $((attempt * 10))
+          done
+          exit 1
+
+      - name: Upload RingWatch logs
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: ringwatch-logs
+          path: .ringwatch/run.log
