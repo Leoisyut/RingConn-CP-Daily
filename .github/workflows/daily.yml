@@ -1,6 +1,6 @@
 name: RingWatch Daily Competitor Digest
 
-on:
+"on":
   schedule:
     # 09:00 Asia/Shanghai == 01:00 UTC
     - cron: "0 1 * * *"
