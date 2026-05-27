@@ -3,7 +3,8 @@ name: RingWatch Daily Competitor Digest
 "on":
   schedule:
     # 09:00 Asia/Shanghai == 01:00 UTC
-    - cron: "0 1 * * *"
+    # TEMP (debug): every 5 minutes
+    - cron: "*/5 * * * *"
   workflow_dispatch:
 
 jobs:
