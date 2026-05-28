@@ -61,7 +61,7 @@ def score_item(
             score -= 8
             matched.append(f"exclude:{term}")
 
-    if item.published is not None and item.published >= datetime.now() - timedelta(days=2):
+    if item.published is not None and item.published >= datetime.utcnow() - timedelta(days=2):
         score += 1
 
     item.score = score
@@ -72,7 +72,7 @@ def score_item(
 def within_lookback(item: NewsItem, lookback_days: int) -> bool:
     if item.published is None:
         return True
-    return item.published >= datetime.now() - timedelta(days=lookback_days)
+    return item.published >= datetime.utcnow() - timedelta(days=lookback_days)
 
 
 def dedupe_items(items: list[NewsItem]) -> list[NewsItem]:

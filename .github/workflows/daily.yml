@@ -3,8 +3,7 @@ name: RingWatch Daily Competitor Digest
 on:
   schedule:
     # 09:00 Asia/Shanghai == 01:00 UTC
-    # TEMP (debug): every 5 minutes
-    - cron: "*/5 * * * *"
+    - cron: "0 1 * * *"
   workflow_dispatch:
 
 jobs:
@@ -13,6 +12,9 @@ jobs:
     permissions:
       contents: read
     timeout-minutes: 15
+    concurrency:
+      group: ringwatch-daily
+      cancel-in-progress: true
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

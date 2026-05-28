@@ -2,13 +2,22 @@ from __future__ import annotations
 
 from datetime import datetime
 from textwrap import shorten
+from zoneinfo import ZoneInfo
 
 from .config import AgentConfig
 from .models import NewsItem
 
 
+def _now_for_config(config: AgentConfig) -> datetime:
+    try:
+        return datetime.now(ZoneInfo(config.timezone))
+    except Exception:  # noqa: BLE001 - fallback when timezone is invalid/missing.
+        return datetime.utcnow()
+
+
 def build_text_report(config: AgentConfig, items: list[NewsItem], errors: list[str]) -> str:
-    lines = [config.report_title, f"生成时间: {datetime.now().strftime('%Y-%m-%d %H:%M')}"]
+    generated_at = _now_for_config(config).strftime("%Y-%m-%d %H:%M")
+    lines = [config.report_title, f"生成时间: {generated_at}"]
     if not items:
         lines.append("")
         lines.append("暂无新的高置信竞品产品动态。")
@@ -40,7 +49,7 @@ def _escape_lark_md(value: str) -> str:
 
 
 def build_feishu_card(config: AgentConfig, items: list[NewsItem], errors: list[str]) -> dict:
-    generated_at = datetime.now().strftime("%Y-%m-%d %H:%M")
+    generated_at = _now_for_config(config).strftime("%Y-%m-%d %H:%M")
     elements: list[dict] = [
         {
             "tag": "div",
