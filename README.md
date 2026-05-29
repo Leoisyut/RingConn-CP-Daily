@@ -4,7 +4,7 @@ RingWatch 是给 RingConn 产品团队使用的竞品动态 agent：每天搜索
 
 ## 当前竞品分层
 
-截至 2026-05-12，建议先按三层监控：
+截至 2026-05-29，建议先按三层监控：
 
 | 层级 | 公司/品牌 | 核心产品 | 为什么要看 |
 | --- | --- | --- | --- |
@@ -15,9 +15,9 @@ RingWatch 是给 RingConn 产品团队使用的竞品动态 agent：每天搜索
 | 重要直接竞品 | Amazfit / Zepp Health | Amazfit Helio Ring | 价格、运动生态和 Zepp App 体系，适合作为大众化/低价位参照。 |
 | 重要直接竞品 | Movano Health | Evie Ring | 女性健康定位和医疗级传感方向，适合跟踪细分人群策略。 |
 | 区域/价格竞品 | Noise、boAt、Luna、Rollme、COLMI、RENPHO | 多款智能戒指 | 印度、中国跨境和低价渠道会影响价格锚点、SKU 和功能下探。 |
-| 邻近替代品 | Whoop、Garmin、Apple Watch、Samsung Watch | 无屏手环/运动表/健康表 | 用户预算、恢复分、睡眠和订阅心智会被这些产品分流。 |
+| 邻近替代品 | Fitbit（Google）、Whoop、Garmin、Apple Watch、Samsung Watch | 平台/手环/运动表/健康表 | 这些平台的软件更新、订阅与算法会影响用户对健康洞察的预期。 |
 
-详细监控配置在 [config/competitors.json](/Users/bernicelay/Documents/New%20project/config/competitors.json)。
+详细监控配置在 `config/competitors.json`。
 
 ## 快速开始
 
@@ -40,7 +40,9 @@ python3 -m ringwatch run
 
 ### GitHub Actions
 
-项目已内置 [.github/workflows/daily.yml](/Users/bernicelay/Documents/New%20project/.github/workflows/daily.yml)，默认每天北京时间 09:00 运行。
+项目已内置 `.github/workflows/daily.yml`，默认配置为每天北京时间 09:00（UTC 01:00）运行。
+
+注意：GitHub Actions 的 `schedule` 是 best-effort（不保证严格准点/不丢触发）。如果业务上必须“稳定在中国时间 09:00 触发”，建议使用「外部定时器」在 09:00 调用 GitHub API 触发 `workflow_dispatch`（下文提供示例）。
 
 需要在仓库 Secrets 里添加：
 
@@ -48,6 +50,20 @@ python3 -m ringwatch run
 | --- | --- | --- |
 | `FEISHU_WEBHOOK_URL` | 是 | 飞书自定义机器人 webhook |
 | `FEISHU_WEBHOOK_SECRET` | 否 | 飞书签名密钥 |
+
+### 外部定时器触发（推荐更稳定）
+
+用外部 cron（服务器/定时服务）在中国时间 09:00 调用 GitHub API，触发工作流的 `workflow_dispatch`：
+
+- URL：`https://api.github.com/repos/<owner>/<repo>/actions/workflows/daily.yml/dispatches`
+- Method：`POST`
+- Headers：
+  - `Authorization: token <GITHUB_TOKEN>`
+  - `Accept: application/vnd.github+json`
+  - `Content-Type: application/json`
+- Body：`{"ref":"main"}`
+
+`GITHUB_TOKEN` 建议使用 classic PAT（Tokens (classic)），并在 scopes 中勾选 `repo`（以及如页面可见则勾选 `workflow`）。
 
 ### 服务器 cron
 
@@ -76,3 +92,5 @@ python3 -m ringwatch send-test              # 发送飞书连通性测试
 - 电池、充电盒、尺寸、材质、防水、佩戴舒适度等硬件变化。
 
 状态文件默认保存在 `.ringwatch/state.json`，用于避免重复推送。
+
+卡片与文本报告中的“生成时间”会按配置里的 `agent.timezone` 输出（默认 `Asia/Shanghai`），避免在 CI/服务器（通常是 UTC）上运行时显示错时区。
