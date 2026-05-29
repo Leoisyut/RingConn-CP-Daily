@@ -183,6 +183,24 @@
       ]
     },
     {
+      "id": "fitbit_google",
+      "name": "Fitbit",
+      "company": "Google",
+      "priority": "adjacent",
+      "products": ["Fitbit app", "Fitbit devices", "Pixel Watch", "Fitbit Premium"],
+      "rationale": "Adjacent health platform competitor: tracking sleep, readiness, AI insights, subscription, and sensor features that influence user expectations.",
+      "queries": [
+        "Fitbit app update sleep readiness score feature",
+        "Fitbit Premium update subscription features",
+        "Pixel Watch Fitbit update health sensor sleep",
+        "Fitbit patent health sensor update"
+      ],
+      "official_urls": [
+        "https://blog.google/products/fitbit/",
+        "https://help.fitbit.com/"
+      ]
+    },
+    {
       "id": "noise",
       "name": "Noise",
       "company": "Noise",
